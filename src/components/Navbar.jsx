@@ -3,10 +3,21 @@ import { useState } from "react";
 import "./css/navbar.css";
 import logo from "../assets/logo.png";
 import { pairHashpack } from "./hashconnect";
+import Popup from "./Popup";
 
 function Navbar() {
   const [pairingString, setPairingString] = useState();
   const [accountId, setAccountId] = useState();
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handlePopupOpen = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
+  };
 
   return (
     <div className="nav-wrapper">
@@ -35,8 +46,15 @@ function Navbar() {
               <p id="accountid">Connect</p>
             </button>
           </li>
+
+          <li className="nav-item">
+            <button className="temp" onClick={handlePopupOpen}>
+              Log In
+            </button>
+          </li>
         </ul>
       </nav>
+      {isPopupOpen && <Popup onClose={handlePopupClose} />}
     </div>
   );
 }
