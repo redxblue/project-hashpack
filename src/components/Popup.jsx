@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./css/popup.css";
 import { pairHashpack } from "./hashconnect";
+import logo from "../assets/hashpack logo.png";
 
 function Popup({ onClose, onPopupButtonClick }) {
+  useEffect(() => {
+    // Add event listener to close the popup when clicking outside
+    const handleOutsideClick = (event) => {
+      if (event.target.classList.contains("popup-container")) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [onClose]);
+
   return (
     <div className="popup-container">
       <div className="popup">
@@ -18,9 +35,12 @@ function Popup({ onClose, onPopupButtonClick }) {
             console.log(accountId);
           }}
         >
+          <img className="button-image" src={logo} alt="Company Logo" />
           Log In with Hashpack
         </button>
-        <button onClick={onClose}>Close</button>
+        <button className="close-button" onClick={onClose}>
+          Close
+        </button>
       </div>
     </div>
   );

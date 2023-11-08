@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import "./css/navbar.css";
 import logo from "../assets/logo.png";
@@ -8,6 +8,7 @@ import Popup from "./Popup";
 function Navbar() {
   const [pairingString, setPairingString] = useState();
   const [accountId, setAccountId] = useState();
+  const [login, setlogin] = useState(true);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -18,6 +19,7 @@ function Navbar() {
   const handlePopupClose = () => {
     setIsPopupOpen(false);
   };
+  useEffect(() => {}, [login]);
 
   return (
     <div className="nav-wrapper">
@@ -34,24 +36,32 @@ function Navbar() {
           <li className="nav-item">
             <button
               className="temp"
-              onClick={async () => {
-                const initData = await pairHashpack();
+              // onClick={async () => {
+              //   const initData = await pairHashpack();
 
-                console.log(initData);
-                setPairingString(initData.pairingString);
-                setAccountId(accountId);
-                console.log(accountId);
-              }}
+              //   console.log(initData);
+              //   setPairingString(initData.pairingString);
+              //   setAccountId(accountId);
+              //   console.log(accountId);
+              // }}
             >
               <p id="accountid">Connect</p>
             </button>
           </li>
 
-          <li className="nav-item">
-            <button className="temp" onClick={handlePopupOpen}>
-              Log In
-            </button>
-          </li>
+          {login ? (
+            <li className="nav-item">
+              <button className="temp" onClick={handlePopupOpen}>
+                Log In
+              </button>
+            </li>
+          ) : (
+            <li className="nav-item">
+              <button className="temp" onClick={handlePopupOpen}>
+                Log Out
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
       {isPopupOpen && <Popup onClose={handlePopupClose} />}
