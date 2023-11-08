@@ -35,7 +35,7 @@ function Popup({ onClose, onPopupButtonClick }) {
             console.log(accountId);
           }}
         >
-          <img className="button-image" src={logo} alt="Company Logo" />
+          {/* <img className="button-image" src={logo} alt="Company Logo" /> */}
           Log In with Hashpack
         </button>
         {/* <button className="close-button" onClick={onClose}>

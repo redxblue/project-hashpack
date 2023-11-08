@@ -116,10 +116,13 @@ h2 {
 h2 {
   text-align: center;
   padding-bottom: 10px;
+  font-family: sans-serif;
+  font-size: medium;
 }
 
 .button-image {
-  width: 24px; /* Adjust as needed */
-  height: 24px; /* Adjust as needed */
+  width: 30px; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
   margin-right: 8px; /* Add margin to separate the image from the text */
+  margin-top: 10px;
 }
