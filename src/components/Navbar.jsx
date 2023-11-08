@@ -35,20 +35,16 @@ function Navbar() {
           </li> */}
 
           <li className="nav-item">
-            <button
-              className="temp"
-
+            {
               // onClick={async () => {
               //   const initData = await pairHashpack();
-
               //   console.log(initData);
               //   setPairingString(initData.pairingString);
               //   setAccountId(accountId);
               //   console.log(accountId);
-              // }}
-            >
-              <p id="accountid">Connect</p>
-            </button>
+              // }
+            }
+            <p id="accountid"></p>
           </li>
 
           {login ? (
