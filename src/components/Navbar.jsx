@@ -26,16 +26,18 @@ function Navbar() {
       <nav className="navbar">
         <img src={logo} alt="Company Logo" />
         <ul className="nav no-search">
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a href="#">Home</a>
           </li>
+
           <li className="nav-item">
             <a href="#">About</a>
-          </li>
+          </li> */}
 
           <li className="nav-item">
             <button
               className="temp"
+
               // onClick={async () => {
               //   const initData = await pairHashpack();
 
@@ -51,13 +53,13 @@ function Navbar() {
 
           {login ? (
             <li className="nav-item">
-              <button className="temp" onClick={handlePopupOpen}>
+              <button className="temp2" onClick={handlePopupOpen}>
                 Log In
               </button>
             </li>
           ) : (
             <li className="nav-item">
-              <button className="temp" onClick={handlePopupOpen}>
+              <button className="temp2" onClick={handlePopupOpen}>
                 Log Out
               </button>
             </li>

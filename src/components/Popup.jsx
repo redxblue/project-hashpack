@@ -38,9 +38,9 @@ function Popup({ onClose, onPopupButtonClick }) {
           <img className="button-image" src={logo} alt="Company Logo" />
           Log In with Hashpack
         </button>
-        <button className="close-button" onClick={onClose}>
+        {/* <button className="close-button" onClick={onClose}>
           Close
-        </button>
+        </button> */}
       </div>
     </div>
   );

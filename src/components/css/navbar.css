@@ -13,24 +13,29 @@
   align-items: center;
   height: 50px;
   overflow: hidden;
+  position: fixed;
+  background-color: #fff;
+  width: 100%;
+  box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.2);
 }
 
 .navbar img {
   height: 30px;
   width: auto;
   justify-self: start;
-  margin-left: 20px;
+  margin-left: 60px;
   margin-bottom: 10px;
 }
 
 .navbar ul {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   justify-self: end;
   margin: 0; /* Remove the margin */
   padding: 0; /* Remove the padding */
-  margin-top: 12px;
+  margin-top: 10px;
+  margin-right: 50px;
 }
 
 .nav-item a {
@@ -66,5 +71,39 @@
   :hover {
     border-color: #000000;
     background: #f7f7f7;
+  }
+}
+
+.temp2 {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 5px 20px;
+  border: 1px solid #222222;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s,
+    -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
+  background: #fff;
+  color: #222222;
+  :hover {
+    border-color: #000000;
+    background: #f7f7f7;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-list li {
+    margin-right: 10px; /* Reduce the margin to allow for more space */
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-list a {
+    font-size: 14px; /* Reduce font size at even narrower screens */
   }
 }
