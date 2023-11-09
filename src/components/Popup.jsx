@@ -34,7 +34,7 @@ function Popup({ onClose, onPopupButtonClick }) {
             setAccountId(accountId);
             console.log(accountId);
             setLogin(true);
-
+//
             // Display an alert for successful login
             window.alert("Login was successful");
           }}
