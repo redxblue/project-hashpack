@@ -19,7 +19,19 @@ function Navbar() {
   const handlePopupClose = () => {
     setIsPopupOpen(false);
   };
-  useEffect(() => {}, [login]);
+  useEffect(() => {
+    // console.log("Login state changed: ", login);
+    // // Your login logic here
+  }, [login]);
+
+  // Check for stored account ID on page load
+  useEffect(() => {
+    const storedAccountId = localStorage.getItem("accountId");
+    if (storedAccountId) {
+      setAccountId(storedAccountId);
+      setLogin(true);
+    }
+  }, [login]);
 
   return (
     <div className="nav-wrapper">
@@ -44,7 +56,8 @@ function Navbar() {
               //   console.log(accountId);
               // }
             }
-            <p id="accountid"></p>
+
+            <p id="accountid">{accountId}</p>
           </li>
 
           {login ? (
@@ -62,7 +75,15 @@ function Navbar() {
           )}
         </ul>
       </nav>
-      {isPopupOpen && <Popup onClose={handlePopupClose} />}
+
+      {isPopupOpen && (
+        <Popup
+          onClose={handlePopupClose}
+          setPairingString={setPairingString}
+          setAccountId={setAccountId}
+          setLogin={setlogin}
+        />
+      )}
     </div>
   );
 }

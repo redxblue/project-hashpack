@@ -33,6 +33,10 @@ function Popup({ onClose, onPopupButtonClick }) {
             setPairingString(initData.pairingString);
             setAccountId(accountId);
             console.log(accountId);
+            setLogin(true);
+
+            // Display an alert for successful login
+            window.alert("Login was successful");
           }}
         >
           {/* <img className="button-image" src={logo} alt="Company Logo" /> */}
