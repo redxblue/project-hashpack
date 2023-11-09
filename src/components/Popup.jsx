@@ -3,7 +3,7 @@ import "./css/popup.css";
 import { pairHashpack } from "./hashconnect";
 import logo from "../assets/hashpack logo.png";
 
-function Popup({ onClose, onPopupButtonClick }) {
+function Popup({ onClose, onPopupButtonClick,setPairingString,setAccountId,accountId,setLogin,login }) {
   useEffect(() => {
     // Add event listener to close the popup when clicking outside
     const handleOutsideClick = (event) => {
@@ -34,9 +34,9 @@ function Popup({ onClose, onPopupButtonClick }) {
             setAccountId(accountId);
             console.log(accountId);
             setLogin(true);
-//
+
             // Display an alert for successful login
-            window.alert("Login was successful");
+            //window.alert("Login was successful");
           }}
         >
           {/* <img className="button-image" src={logo} alt="Company Logo" /> */}

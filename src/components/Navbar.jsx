@@ -8,7 +8,7 @@ import Popup from "./Popup";
 function Navbar() {
   const [pairingString, setPairingString] = useState();
   const [accountId, setAccountId] = useState();
-  const [login, setlogin] = useState(true);
+  const [login, setLogin] = useState(false);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -24,25 +24,28 @@ function Navbar() {
     // // Your login logic here
     console.log("in first navbar useEffect")
     let data=localStorage.getItem("hashconnectData")
+    if(data){
     data =JSON.parse(data)
     console.log(data.pairingData[0].accountIds[0])
-    data=data.pairingData[0].accountIds[0]
+    data=data.pairingData[0].accountIds[0] //current account ID
+    data?setLogin(true):setLogin(false)  ////for logout button
 
-    const storedAccountId = localStorage.getItem("accountId");
+    const storedAccountId = data
     setAccountId(storedAccountId);
     const accountId = document.getElementById("accountid");
     accountId.innerHTML = data;
+    }
   }, []);
 
   // Check for stored account ID on page load
-  useEffect(() => {
-    const storedAccountId = localStorage.getItem("accountId");
-    if (storedAccountId) {
-      setAccountId(storedAccountId);
-      console.log(`This is storedAccountId=>${storedAccountId}`)
-      setLogin(true);
-    }
-  }, [login]);
+  // useEffect(() => {
+  //   const storedAccountId = localStorage.getItem("accountId");
+  //   if (storedAccountId) {
+  //     setAccountId(storedAccountId);
+  //     console.log(`This is storedAccountId=>${storedAccountId}`)
+  //     setLogin(true);
+  //   }
+  // }, [login]);
 
   return (
     <div className="nav-wrapper">
@@ -64,16 +67,17 @@ function Navbar() {
 
           {login ? (
             <li className="nav-item">
-              <button className="temp2" onClick={handlePopupOpen}>
-                Log In
-              </button>
-            </li>
+            <button className="temp2" onClick={handlePopupOpen}>
+              Log Out
+            </button>
+          </li>
+           
           ) : (
             <li className="nav-item">
-              <button className="temp2" onClick={handlePopupOpen}>
-                Log Out
-              </button>
-            </li>
+            <button className="temp2" onClick={handlePopupOpen}>
+              Log In
+            </button>
+          </li>
           )}
         </ul>
       </nav>
@@ -83,7 +87,9 @@ function Navbar() {
           onClose={handlePopupClose}
           setPairingString={setPairingString}
           setAccountId={setAccountId}
-          setLogin={setlogin}
+          accountId={accountId}
+          setLogin={setLogin}
+          login={login}
         />
       )}
     </div>
