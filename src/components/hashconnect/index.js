@@ -9,6 +9,7 @@ let appMetadata = {
 };
 
 export const pairHashpack = async () => {
+  console.log("inside pairHaspack function")
   let initData = await hashconnect.init(appMetadata, "testnet", false);
   console.log(`this is initData returned by pairHashpack fn${initData}`);
 
@@ -20,10 +21,13 @@ export const pairHashpack = async () => {
     console.log("wallet paired");
     console.log(pairingData);
 
-    //accountId = pairingData.accountIds[0]
-
     const accountId = document.getElementById("accountid");
     accountId.innerHTML = pairingData.accountIds[0];
+
+    if(pairingData.accountIds[0]){
+    const logoutButton=document.getElementById("logoutbutton");
+    logoutButton.textContent="log out"
+    }
   });
 
   return initData;

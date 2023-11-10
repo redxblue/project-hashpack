@@ -26,15 +26,17 @@ function Navbar() {
     let data=localStorage.getItem("hashconnectData")
     if(data){
     data =JSON.parse(data)
-    console.log(data.pairingData[0].accountIds[0])
-    data=data.pairingData[0].accountIds[0] //current account ID
-    data?setLogin(true):setLogin(false)  ////for logout button
-
+    console.log(data?.pairingData[0]?.accountIds[0])
+    data=data?.pairingData[0]?.accountIds[0] //current account ID
     const storedAccountId = data
     setAccountId(storedAccountId);
     const accountId = document.getElementById("accountid");
-    accountId.innerHTML = data;
+    accountId.innerHTML = data;                //to get wallet address displayed on page refresh
+    if(data){                                  //to get logout displayed
+    const logoutButton=document.getElementById("logoutbutton");
+    logoutButton.textContent="log out"
     }
+  }
   }, []);
 
   // Check for stored account ID on page load
@@ -65,20 +67,14 @@ function Navbar() {
             <p id="accountid">{/*accountId*/}</p>
           </li>
 
-          {login ? (
-            <li className="nav-item">
-            <button className="temp2" onClick={handlePopupOpen}>
-              Log Out
-            </button>
-          </li>
            
-          ) : (
+          
             <li className="nav-item">
-            <button className="temp2" onClick={handlePopupOpen}>
+            <button id="logoutbutton"className="temp2" onClick={handlePopupOpen}>
               Log In
             </button>
           </li>
-          )}
+          
         </ul>
       </nav>
 

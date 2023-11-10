@@ -20,28 +20,40 @@ function Popup({ onClose, onPopupButtonClick,setPairingString,setAccountId,accou
     };
   }, [onClose]);
 
+  // useEffect(()=>{
+  //   accountId?setLogin(true):setLogin(false)
+  // },[accountId])
+
+  const connectWallet=async()=>{
+    const initData = await pairHashpack();
+
+    console.log(initData);
+    setPairingString(initData.pairingString);
+    console.log(initData.savedPairings[0])
+    setAccountId(()=>initData.savedPairings[0]);        //<---------
+    console.log(accountId);
+    console.log("savedPairings",initData.savedPairings)
+
+  }
+  const disconnectWallet=()=>{
+    console.log("disconnecting wallet")
+    localStorage.clear();
+  }
   return (
     <div className="popup-container">
       <div className="popup">
         <h2>Log In with a Wallet</h2>
-        <button
-          className="connect-wallet"
-          onClick={async () => {
-            const initData = await pairHashpack();
-
-            console.log(initData);
-            setPairingString(initData.pairingString);
-            setAccountId(accountId);
-            console.log(accountId);
-            setLogin(true);
-
-            // Display an alert for successful login
-            //window.alert("Login was successful");
-          }}
-        >
-          {/* <img className="button-image" src={logo} alt="Company Logo" /> */}
-          Log In with Hashpack
+        {accountId?  
+        <button className="connect-wallet"
+          onClick={disconnectWallet}>
+          Log Out with Hashpack
         </button>
+        :
+        <button className="connect-wallet"
+        onClick={connectWallet}>
+        Log In with Hashpack
+        </button>
+        }
         {/* <button className="close-button" onClick={onClose}>
           Close
         </button> */}
