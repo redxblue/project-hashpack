@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import "./css/popup.css";
-import { pairHashpack } from "./hashconnect";
+import { HashConnect } from "hashconnect";
 import logo from "../assets/hashpack logo.png";
 
-function Popup({ onClose, onPopupButtonClick,setPairingString,setAccountId,accountId,setLogin,login }) {
+function Popup({ onClose, onPopupButtonClick,setPairingString,setAccountId,accountId,pairHashpack,hashconnect,setLogin,login }) {
   useEffect(() => {
     // Add event listener to close the popup when clicking outside
     const handleOutsideClick = (event) => {
@@ -33,14 +33,27 @@ function Popup({ onClose, onPopupButtonClick,setPairingString,setAccountId,accou
     setAccountId(()=>initData.savedPairings[0]);        //<---------
     console.log(accountId);
     console.log("savedPairings",initData.savedPairings)
+    console.log(hashconnect)//@
 
   }
-  const disconnectWallet=()=>{
+  const disconnectWallet=async()=>{
     console.log("disconnecting wallet")
-    localStorage.clear();
+    //let topic=(localStorage.getItem("hashconnectData") && JSON.parse(localStorage.getItem("hashconnectData"))
+    //?.topic)
+    let topic =hashconnect.hcData.topic
+    console.log(topic);
+    console.log(hashconnect)
+    await hashconnect.disconnect(topic)
+    console.log(hashconnect.status)
+    //console.log(status)
+    //localStorage.clear();
   }
+
+
+
+
   return (
-    <div className="popup-container">
+    <div id="disconnect-wallet"className="popup-container">
       <div className="popup">
         <h2>Log In with a Wallet</h2>
         {accountId?  
@@ -49,7 +62,7 @@ function Popup({ onClose, onPopupButtonClick,setPairingString,setAccountId,accou
           Log Out with Hashpack
         </button>
         :
-        <button className="connect-wallet"
+        <button id ="connect-wallet"className="connect-wallet"
         onClick={connectWallet}>
         Log In with Hashpack
         </button>

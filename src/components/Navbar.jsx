@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import "./css/navbar.css";
 import logo from "../assets/logo.png";
-// import { pairHashpack } from "./hashconnect";
+import { appMetadata,hashconnect, } from "./hashconnect";
 import Popup from "./Popup";
 
 function Navbar() {
@@ -30,48 +30,56 @@ function Navbar() {
     data=data?.pairingData[0]?.accountIds[0] //current account ID
     const storedAccountId = data
     setAccountId(storedAccountId);
-    const accountId = document.getElementById("accountid");
-    accountId.innerHTML = data;                //to get wallet address displayed on page refresh
-    if(data){                                  //to get logout displayed
-    const logoutButton=document.getElementById("logoutbutton");
-    logoutButton.textContent="log out"
-    }
+    // const accountId = document.getElementById("accountid");
+    // accountId.innerHTML = data;                //to get wallet address displayed on page refresh
+    // if(data){                                  //to get logout displayed
+    // const logoutButton=document.getElementById("logoutbutton");
+    // logoutButton.textContent="log out"
+    // }
   }
   }, []);
+////////////////////////////////////////////////////////////////
 
-  // Check for stored account ID on page load
-  // useEffect(() => {
-  //   const storedAccountId = localStorage.getItem("accountId");
-  //   if (storedAccountId) {
-  //     setAccountId(storedAccountId);
-  //     console.log(`This is storedAccountId=>${storedAccountId}`)
-  //     setLogin(true);
-  //   }
-  // }, [login]);
 
+const pairHashpack = async () => {
+  hashconnect.setupEvents()
+  console.log("inside pairHaspack function")
+  //setUpHashConnectEvents()
+  console.log(hashconnect)//@
+  let initData = await hashconnect.init(appMetadata, "testnet", false);
+  console.log(`this is initData returned by pairHashpack fn${initData}`);
+
+  hashconnect.foundExtensionEvent.once((walletMetadata) => {
+    hashconnect.connectToLocalWallet(initData.pairingString, walletMetadata);
+  });
+
+  hashconnect.pairingEvent.once((pairingData) => {
+    console.log("wallet paired");
+    console.log(pairingData);
+    setAccountId(pairingData.accountIds[0]);
+    console.log(hashconnect)//@
+    console.log(hashconnect.hcData.pairedData)
+
+  });
+
+  return initData;
+};
+
+
+////////////////////////////////////////////////////////////////
   return (
     <div className="nav-wrapper">
       <nav className="navbar">
         <img src={logo} alt="Company Logo" />
         <ul className="nav no-search">
-          {/* <li className="nav-item">
-            <a href="#">Home</a>
-          </li>
 
           <li className="nav-item">
-            <a href="#">About</a>
-          </li> */}
-
-          <li className="nav-item">
-
-            <p id="accountid">{/*accountId*/}</p>
+            <p id="accountid">{accountId}</p>
           </li>
-
-           
           
-            <li className="nav-item">
-            <button id="logoutbutton"className="temp2" onClick={handlePopupOpen}>
-              Log In
+          <li className="nav-item">
+            <button id="logoutbutton"className="logout-button" onClick={handlePopupOpen}>
+              {accountId?"Log out":"Log In"}
             </button>
           </li>
           
@@ -86,6 +94,8 @@ function Navbar() {
           accountId={accountId}
           setLogin={setLogin}
           login={login}
+          pairHashpack={pairHashpack}
+          hashconnect={hashconnect}
         />
       )}
     </div>
