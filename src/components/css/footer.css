@@ -7,7 +7,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
 .container {
   max-width: 1170px;
@@ -21,7 +20,8 @@
 .footer {
   background-color: #24262b;
   padding: 70px 0;
-  min-height: 100vh;
+
+  height: 30vh;
 }
 .footer-col {
   width: 25%;
@@ -85,6 +85,10 @@
   .footer-col {
     width: 50%;
     margin-bottom: 30px;
+  }
+
+  .footer {
+    height: 55vh;
   }
 }
 @media (max-width: 574px) {

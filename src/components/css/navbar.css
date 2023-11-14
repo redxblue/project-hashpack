@@ -14,7 +14,7 @@
   height: 50px;
   overflow: hidden;
   position: fixed;
-  background-color: #fff;
+  background-color: #000000;
   width: 100%;
   box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.2);
 }
@@ -48,6 +48,10 @@
 
 .nav-item a:hover {
   color: #3a012e;
+}
+
+#accountid {
+  color: #fff;
 }
 
 /* Button */
